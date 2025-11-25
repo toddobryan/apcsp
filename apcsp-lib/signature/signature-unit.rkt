@@ -133,10 +133,11 @@
       
     (cond
       [(null? l) l]
-      [(not (pair? l)) (signature-violation obj self #f #f) obj]
+      [(not (pair? l)) (signature-violation obj self #f #f)
+                       obj]
       [(hash-ref lists-table l #f)
-       (lambda (seen)
-         ;;(eprintf "~s\n" (list 'seen seen (eq? self (car seen))))
+       => (lambda (seen)
+         ;(eprintf "~s\n" (list 'seen seen (eq? self (car seen))))
          (if (eq? self (car seen))
              (cdr seen)
              (go-on)))]
@@ -159,7 +160,7 @@
   #:transparent
   #:extra-constructor-name make-list-info)
 
-(define arbitrary-nonempty-list (arbitrary-pair arbitrary arbitrary-list))
+(define arbitrary-nonempty-list (arbitrary-pair arbitrary-integer (arbitrary-list arbitrary-integer)))
 
 (define (make-nonempty-list-signature name arg-signature syntax)
   (make-signature

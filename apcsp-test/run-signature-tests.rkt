@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require rackunit/text-ui)
+(require rackunit/gui)
 (require "./signature.rkt")
 
-(run-tests all-signature-tests)
+((make-gui-runner) all-signature-tests)
